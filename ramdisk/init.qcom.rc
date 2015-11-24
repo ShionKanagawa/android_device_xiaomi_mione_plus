@@ -286,7 +286,7 @@ service qmuxd /system/bin/qmuxd
 
 service netmgrd /system/bin/netmgrd
     class main
-    group radio system
+    group radio system wakelock
     disabled
 
 service sensors /system/bin/sensors.qcom
