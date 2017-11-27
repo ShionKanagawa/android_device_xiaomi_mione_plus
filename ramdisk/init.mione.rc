@@ -78,8 +78,10 @@ on charger
     setprop sys.usb.config adb
 
 
-service chargeonlymode /sbin/chargeonlymode
+service charger /sbin/healthd -c
     class charger
+    critical
+    seclabel u:r:healthd:s0
 
 
 on property:sys.mione.battlevel=low

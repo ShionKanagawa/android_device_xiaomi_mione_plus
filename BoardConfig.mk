@@ -32,6 +32,10 @@ BOARD_HAVE_XIAOMI_MIONE := true
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := mione
 
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+BOARD_CHARGER_DISABLE_INIT_BLANK := true
+
 # Kernel
 BOARD_KERNEL_BASE := 0x40200000
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=mione kgsl.mmutype=gpummu vmalloc=400M androidboot.selinux=permissive
