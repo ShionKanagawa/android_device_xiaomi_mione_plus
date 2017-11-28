@@ -4,8 +4,8 @@ PRODUCT_RELEASE_NAME := mione_plus
 
 TARGET_BOOTANIMATION_NAME := vertical-480x854
 
-# Inherit some common CM stuff.
-$(call inherit-product, vendor/cm/config/common_full_phone.mk)
+# Inherit some common lineage stuff.
+$(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
 PRODUCT_PACKAGES += \
     Firewall \
