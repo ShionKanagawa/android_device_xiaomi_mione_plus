@@ -66,6 +66,9 @@ BOARD_HAVE_NFC := false
 TARGET_RIL_VARIANT := caf
 BOARD_RIL_CLASS := ../../../device/xiaomi/mione_plus/ril
 
+# SHIM
+TARGET_LD_SHIM_LIBS := /system/lib/hw/camera.vendor.msm8660.so|libshim_camera.so:/system/lib/hw/sensors.msm8660.so|libshim_camera.so
+
 # Filesystem
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
