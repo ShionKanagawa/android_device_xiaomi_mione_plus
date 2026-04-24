@@ -29,7 +29,8 @@ PRODUCT_PACKAGES += \
 
 # gps.conf
 PRODUCT_COPY_FILES += \
-    device/xiaomi/mione_plus/configs/gps.conf:system/etc/gps.conf
+    device/xiaomi/mione_plus/configs/gps.conf:system/etc/gps.conf \
+    device/xiaomi/mione_plus/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # mac support for mione_plus
 # credit: huangqiwu
@@ -62,8 +63,7 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
     hostapd_default.conf \
-    wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant
 
 # Bluetooth
 PRODUCT_PACKAGES += \
@@ -82,6 +82,7 @@ PRODUCT_COPY_FILES += \
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 PRODUCT_COPY_FILES += $(shell \
     find device/xiaomi/mione_plus/prebuilt -name '*.ko' \
+    ! -name 'bcmdhd.ko' \
     | sed -r 's/^\/?(.*\/)([^/ ]+)$$/\1\2:system\/lib\/modules\/\2/' \
     | tr '\n' ' ')
 endif
