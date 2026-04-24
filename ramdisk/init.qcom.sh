@@ -52,11 +52,20 @@ start_sensors()
 #
 # wifi_module depends on device
 # see https://github.com/ShenduOS/android_device_xiaomi_mione-plus/commit/240bb5d870f32bd10a36372719fc833df48ad154#L2R1
+# BCM4329: Mi 1 (M1, M1C, M1 Youth)
+# BCM4330: Mi 1S, Mi 1S Youth
 #
 wifi_module=`cat /sys/wifi_properties/wifi_module`
 case "$wifi_module" in
     "wifi_module=4330")
+        # BCM4330: Mi 1S
         setprop ro.kernel.wifi_module 4330
+        setprop ro.wifi.chip bcm4330
+    ;;
+    "wifi_module=4329")
+        # BCM4329: Mi 1 (original)
+        setprop ro.kernel.wifi_module 4329
+        setprop ro.wifi.chip bcm4329
     ;;
     "")
         # file not found
