@@ -1,5 +1,10 @@
 # mione_bcm43xx.mk
-# bcm43xx config for mione device
+# bcm43xx config for Xiaomi Mione shared device tree
+# Supports both Mi 1 (BCM4329) and Mi 1S (BCM4330)
+#
+# Kernel auto-detects chip at runtime (dhd_linux.c patch) and selects firmware:
+#   BCM4329 -> fw_bcm4329.bin + nvram.txt (Mi 1 / M1 / M1C / M1 Youth)
+#   BCM4330 -> fw_bcmdhd.bin  + bcmdhd.cal (Mi 1S / Mi 1S Youth)
 #
 # Author: Alex.wang
 # Create: 2013-04-06 17:54
@@ -22,7 +27,6 @@ WIFI_DRIVER_MODULE_PATH := "/system/lib/modules/bcmdhd.ko"
 WIFI_DRIVER_MODULE_ARG  := "firmware_path=/vendor/firmware/fw_bcm4329.bin nvram_path=/system/etc/wifi/nvram.txt"
 WIFI_DRIVER_FW_PATH_STA := "/vendor/firmware/fw_bcm4329.bin"
 WIFI_DRIVER_FW_PATH_AP  := "/vendor/firmware/fw_bcm4329_apsta.bin"
-
 WIFI_DRIVER_FW_PATH_P2P := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 
 # new mione device have bcm4330 chip (M1S, M1Syouth)
@@ -31,10 +35,10 @@ WIFI_DRIVER_MODULE_PATH_DHD := "/system/lib/modules/bcmdhd.ko"
 WIFI_DRIVER_MODULE_ARG_DHD  := "firmware_path=/vendor/firmware/fw_bcmdhd.bin nvram_path=/system/etc/wifi/bcmdhd.cal"
 WIFI_DRIVER_FW_PATH_STA_DHD := "/vendor/firmware/fw_bcmdhd.bin"
 WIFI_DRIVER_FW_PATH_AP_DHD  := "/vendor/firmware/fw_bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_P2P_DHD := "/vendor/firmware/fw_bcmdhd_p2p.bin"
 
 # flag for xiaomi
 BOARD_USE_XIAOMI_MIONE_WIFI := true
 
 PRODUCT_PACKAGES += \
     libnetcmdiface
-

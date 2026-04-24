@@ -29,7 +29,8 @@ PRODUCT_PACKAGES += \
 
 # gps.conf
 PRODUCT_COPY_FILES += \
-    device/xiaomi/mione_plus/configs/gps.conf:system/etc/gps.conf
+    device/xiaomi/mione_plus/configs/gps.conf:system/etc/gps.conf \
+    device/xiaomi/mione_plus/configs/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf
 
 # mac support for mione_plus
 # credit: huangqiwu
@@ -62,8 +63,7 @@ PRODUCT_PACKAGES += \
     dhcpcd.conf \
     hostapd \
     hostapd_default.conf \
-    wpa_supplicant \
-    wpa_supplicant.conf
+    wpa_supplicant
 
 # Bluetooth
 PRODUCT_PACKAGES += \

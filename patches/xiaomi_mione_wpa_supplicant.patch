@@ -1,0 +1,53 @@
+project external/wpa_supplicant_8/
+diff --git a/external/wpa_supplicant_8/wpa_supplicant/Android.mk b/external/wpa_supplicant_8/wpa_supplicant/Android.mk
+index b266414..b5c94ea 100644
+--- a/external/wpa_supplicant_8/wpa_supplicant/Android.mk
++++ b/external/wpa_supplicant_8/wpa_supplicant/Android.mk
+@@ -33,6 +33,10 @@ ifeq ($(BOARD_WPA_SUPPLICANT_PRIVATE_LIB),)
+ L_CFLAGS += -DANDROID_P2P_STUB
+ endif
+
++ifeq ($(BOARD_USE_XIAOMI_MIONE_WIFI),true)
++L_CFLAGS += -DXIAOMI_MIONE_WIFI
++endif
++
+ # Disable roaming in wpa_supplicant
+ ifdef CONFIG_NO_ROAMING
+ L_CFLAGS += -DCONFIG_NO_ROAMING
+diff --git a/external/wpa_supplicant_8/wpa_supplicant/config.h b/external/wpa_supplicant_8/wpa_supplicant/config.h
+index 41b16d1..d62e764 100644
+--- a/external/wpa_supplicant_8/wpa_supplicant/config.h
++++ b/external/wpa_supplicant_8/wpa_supplicant/config.h
+@@ -28,7 +28,11 @@
+ #define DEFAULT_SCAN_CUR_FREQ 0
+ #define DEFAULT_P2P_SEARCH_DELAY 500
+ #define DEFAULT_RAND_ADDR_LIFETIME 60
++#ifdef XIAOMI_MIONE_WIFI
++#define DEFAULT_KEY_MGMT_OFFLOAD 0
++#else
+ #define DEFAULT_KEY_MGMT_OFFLOAD 1
++#endif
+
+ #include "config_ssid.h"
+ #include "wps/wps.h"
+diff --git a/external/wpa_supplicant_8/wpa_supplicant/config_file.c b/external/wpa_supplicant_8/wpa_supplicant/config_file.c
+index 459907a..b7aaaa5 100644
+--- a/external/wpa_supplicant_8/wpa_supplicant/config_file.c
++++ b/external/wpa_supplicant_8/wpa_supplicant/config_file.c
+@@ -448,6 +448,16 @@ struct wpa_config * wpa_config_read(const char *name, struct wpa_config *cfgp)
+ 	wpa_config_debug_dump_networks(config);
+ 	config->cred = cred_head;
+
++#ifdef XIAOMI_MIONE_WIFI
++	if (config->pmf != NO_MGMT_FRAME_PROTECTION ||
++	    config->key_mgmt_offload) {
++		wpa_printf(MSG_INFO, "mione_plus: disabling PMF/key mgmt "
++			   "offload for legacy Broadcom driver");
++		config->pmf = NO_MGMT_FRAME_PROTECTION;
++		config->key_mgmt_offload = 0;
++	}
++#endif
++
+ #ifndef WPA_IGNORE_CONFIG_ERRORS
+ 	if (errors) {
+ 		wpa_config_free(config);
