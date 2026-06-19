@@ -17,6 +17,8 @@ on init
     mkdir /storage/sdcard1 0000 root root
     mkdir /mnt/media_rw/usbdisk0 0700 media_rw media_rw
     mkdir /storage/usbdisk0 0000 root root
+    mkdir /boot 0755 root root
+    mkdir /radio 0755 root root
     export EXTERNAL_STORAGE /storage/emulated/legacy
     export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
@@ -27,6 +29,11 @@ on init
     symlink /storage/emulated/legacy /mnt/sdcard
     symlink /storage/emulated/legacy /storage/sdcard0
     symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+
+    # rmt_storage expects these legacy partition names for modem NV.
+    symlink /dev/block/platform/msm_sdcc.1/by-name/modem_st1 /boot/modem_fs1
+    symlink /dev/block/platform/msm_sdcc.1/by-name/modem_st2 /boot/modem_fs2
+    symlink /dev/block/mmcblk0p14 /boot/modem_fsg
 
     mkdir /vendor/firmware 0775 system system
 
