@@ -121,7 +121,7 @@ case "$usb_config" in
                          setprop persist.sys.usb.config diag,diag_mdm,serial_sdio,serial_tty,rmnet_sdio,mass_storage,adb
                     ;;
                     *)
-                         setprop persist.sys.usb.config mass_storage,adb
+                         setprop persist.sys.usb.config mtp,adb
                     ;;
                 esac
             ;;
